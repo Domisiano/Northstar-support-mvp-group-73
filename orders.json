@@ -1,0 +1,182 @@
+[
+  {
+    "order_id": "1001",
+    "customer_email": "alice.johnson@email.com",
+    "product_name": "UltraComfort Running Shoes",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456784",
+    "carrier": "FedEx",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1002",
+    "customer_email": "bob.smith@email.com",
+    "product_name": "Waterproof Sports Smartwatch",
+    "order_status": "In Transit",
+    "tracking_number": "1Z999AA10123456785",
+    "carrier": "UPS",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1003",
+    "customer_email": "charlie.brown@email.com",
+    "product_name": "Ergonomic Office Chair",
+    "order_status": "Processing",
+    "tracking_number": "Pending Allocation",
+    "carrier": "Northstar Logistics",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1004",
+    "customer_email": "david.miller@email.com",
+    "product_name": "Noise-Cancelling Headphones",
+    "order_status": "Cancelled",
+    "tracking_number": "N/A",
+    "carrier": "N/A",
+    "refund_status": "Refund Issued"
+  },
+  {
+    "order_id": "1005",
+    "customer_email": "emma.davis@email.com",
+    "product_name": "Premium Leather Wallet",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456786",
+    "carrier": "DHL",
+    "refund_status": "Refund Pending Approval"
+  },
+  {
+    "order_id": "1006",
+    "customer_email": "frank.wright@email.com",
+    "product_name": "Stainless Steel Water Bottle",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456787",
+    "carrier": "FedEx",
+    "refund_status": "Refund Approved"
+  },
+  {
+    "order_id": "1007",
+    "customer_email": "grace.lee@email.com",
+    "product_name": "Wireless Mechanical Keyboard",
+    "order_status": "Shipped",
+    "tracking_number": "1Z999AA10123456788",
+    "carrier": "UPS",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1008",
+    "customer_email": "henry.green@email.com",
+    "product_name": "USB-C Multi-Port Hub",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456789",
+    "carrier": "DHL",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1009",
+    "customer_email": "ivy.thomas@email.com",
+    "product_name": "AeroFit Yoga Mat",
+    "order_status": "In Transit",
+    "tracking_number": "1Z999AA10123456790",
+    "carrier": "FedEx",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1010",
+    "customer_email": "jack.white@email.com",
+    "product_name": "Pro-Series Laptop Stand",
+    "order_status": "Processing",
+    "tracking_number": "Pending Allocation",
+    "carrier": "Northstar Logistics",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1011",
+    "customer_email": "karen.black@email.com",
+    "product_name": "Minimalist Backpack 20L",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456791",
+    "carrier": "UPS",
+    "refund_status": "Refund Issued"
+  },
+  {
+    "order_id": "1012",
+    "customer_email": "leo.martin@email.com",
+    "product_name": "Dual-Lens Dash Camera",
+    "order_status": "Shipped",
+    "tracking_number": "1Z999AA10123456792",
+    "carrier": "FedEx",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1013",
+    "customer_email": "mia.garcia@email.com",
+    "product_name": "Smart LED Desk Lamp",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456793",
+    "carrier": "DHL",
+    "refund_status": "Refund Pending Approval"
+  },
+  {
+    "order_id": "1014",
+    "customer_email": "nathan.clark@email.com",
+    "product_name": "4K Ultra-HD Webcam",
+    "order_status": "Cancelled",
+    "tracking_number": "N/A",
+    "carrier": "N/A",
+    "refund_status": "Refund Issued"
+  },
+  {
+    "order_id": "1015",
+    "customer_email": "olivia.martinez@email.com",
+    "product_name": "Heavy-Duty Resistance Bands",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456794",
+    "carrier": "UPS",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1016",
+    "customer_email": "peter.baker@email.com",
+    "product_name": "Pocket-Sized Power Bank",
+    "order_status": "In Transit",
+    "tracking_number": "1Z999AA10123456795",
+    "carrier": "FedEx",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1017",
+    "customer_email": "quinn.taylor@email.com",
+    "product_name": "Bamboo Fiber Coffee Cup",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456796",
+    "carrier": "DHL",
+    "refund_status": "Refund Approved"
+  },
+  {
+    "order_id": "1018",
+    "customer_email": "rachel.scott@email.com",
+    "product_name": "Anti-Theft Travel Pack",
+    "order_status": "Shipped",
+    "tracking_number": "1Z999AA10123456797",
+    "carrier": "UPS",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1019",
+    "customer_email": "sam.wilson@email.com",
+    "product_name": "Bluetooth Audio Receiver",
+    "order_status": "Processing",
+    "tracking_number": "Pending Allocation",
+    "carrier": "Northstar Logistics",
+    "refund_status": "Not Requested"
+  },
+  {
+    "order_id": "1020",
+    "customer_email": "tina.adams@email.com",
+    "product_name": "Memory Foam Travel Pillow",
+    "order_status": "Delivered",
+    "tracking_number": "1Z999AA10123456798",
+    "carrier": "FedEx",
+    "refund_status": "Refund Issued"
+  }
+]
