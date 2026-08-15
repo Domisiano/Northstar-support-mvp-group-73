@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support Chatbot</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .message {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .bot-message {
+            background: #f1f1f1;
+        }
+
+        .handoff-message {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <h1>Customer Support Chatbot</h1>
+
+    <div id="messages"></div>
+
+    <input
+        type="text"
+        id="userQuery"
+        placeholder="Ask about your order, delivery or refund..."
+    >
+
+    <button onclick="handleQuery()">Send</button>
+
+</div>
+
+
+<script>
+
+    /*
+     * MR. ELVISIO — HUMAN HANDOFF FALLBACK ROUTING
+     *
+     * Handles queries that cannot be resolved automatically.
+     * Repeated unresolved queries are escalated to human support.
+     */
+
+    const HANDOFF_CONFIG = {
+        maximumFailedAttempts: 2,
+        ticketPrefix: "ELV"
+    };
+
+    let failedAttempts = 0;
+
+
+    /*
+     * Checks whether the chatbot was unable
+     * to resolve the customer's request.
+     */
+    function isUnresolved(response) {
+
+        if (!response) {
+            return true;
+        }
+
+        const unresolvedMessages = [
+            "No result found",
+            "Unable to find",
+            "Not available",
+            "No matching record",
+            "I don't understand"
+        ];
+
+        return unresolvedMessages.some(message =>
+            response.toLowerCase().includes(message.toLowerCase())
+        );
+    }
+
+
+    /*
+     * Creates a service-desk ticket number
+     * for unresolved customer requests.
+     */
+    function generateTicketNumber() {
+
+        const timestamp = Date.now()
+            .toString()
+            .slice(-6);
+
+        const randomNumber = Math.floor(
+            100 + Math.random() * 900
+        );
+
+        return `${HANDOFF_CONFIG.ticketPrefix}-${timestamp}-${randomNumber}`;
+    }
+
+
+    /*
+     * Sends the unresolved query to human support.
+     */
+    function triggerHumanHandoff(userQuery) {
+
+        const ticketNumber = generateTicketNumber();
+
+        const messages = document.getElementById("messages");
+
+        messages.insertAdjacentHTML(
+            "beforeend",
+
+            `
+            <div class="handoff-message">
+                <strong>Human Support Required</strong>
+
+                <p>
+                    We couldn't resolve your request automatically.
+                    Your query has been forwarded to our support team.
+                </p>
+
+                <p>
+                    <strong>Service Desk Ticket:</strong>
+                    ${ticketNumber}
+                </p>
+
+                <p>
+                    Please keep this ticket number for reference.
+                </p>
+            </div>
+            `
+        );
+
+        console.log("Human handoff created:", {
+            ticket: ticketNumber,
+            query: userQuery,
+            time: new Date().toISOString()
+        });
+
+        return ticketNumber;
+    }
+
+
+    /*
+     * Main fallback routing engine.
+     */
+    function routeQuery(userQuery, chatbotResponse) {
+
+        try {
+
+            if (isUnresolved(chatbotResponse)) {
+
+                failedAttempts++;
+
+                /*
+                 * Allow the customer another attempt before
+                 * escalating the request.
+                 */
+                if (
+                    failedAttempts >=
+                    HANDOFF_CONFIG.maximumFailedAttempts
+                ) {
+
+                    failedAttempts = 0;
+
+                    return triggerHumanHandoff(userQuery);
+                }
+
+            } else {
+
+                /*
+                 * Successful response resets the
+                 * failed-attempt counter.
+                 */
+                failedAttempts = 0;
+            }
+
+            return chatbotResponse;
+
+        } catch (error) {
+
+            console.error(
+                "Chatbot routing error:",
+                error
+            );
+
+            return triggerHumanHandoff(userQuery);
+        }
+    }
+
+
+    /*
+     * Temporary chatbot handler.
+     *
+     * Other team members can connect their order,
+     * refund and delivery modules here later.
+     */
+    function chatbotHandler(query) {
+
+        return "No matching record";
+    }
+
+
+    /*
+     * Handles customer input.
+     */
+    function handleQuery() {
+
+        const input =
+            document.getElementById("userQuery");
+
+        const query = input.value.trim();
+
+        if (!query) {
+            return;
+        }
+
+        const messages =
+            document.getElementById("messages");
+
+        messages.insertAdjacentHTML(
+            "beforeend",
+            `<div class="message">
+                <strong>You:</strong> ${query}
+            </div>`
+        );
+
+        const response =
+            chatbotHandler(query);
+
+        routeQuery(query, response);
+
+        input.value = "";
+    }
+
+</script>
+
+</body>
+</html>
