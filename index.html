@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northstar Support Dashboard & Assistant</title>
+    <style>
+        /* CSS reset and variable declarations for strict Times New Roman compliance */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Dashboard Core Framework Grid Container */
+        .dashboard-container {
+            width: 480px;
+            height: 650px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Branding Dashboard Top Header Component */
+        .chat-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-bottom: 3px solid #2563eb;
+        }
+
+        .chat-header h2 {
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .chat-header p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Scrollable Message History Pipeline Container */
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background-color: #f8fafc;
+        }
+
+        /* Chat bubble styling formatting layout rules */
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .bot-message {
+            background-color: #e2e8f0;
+            color: #0f172a;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            border: 1px solid #cbd5e1;
+        }
+
+        .user-message {
+            background-color: #2563eb;
+            color: #ffffff;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+
+        /* Quick-Reply Dashboard Action Button Component Layout */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            background-color: #ffffff;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .action-btn:hover {
+            background-color: #2563eb;
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Chat Input Tray Bar Component Area */
+        .chat-input-area {
+            padding: 16px;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input-area input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+
+        .chat-input-area button {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 0 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .chat-input-area button:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Brand Header Section -->
+        <div class="chat-header">
+            <h2>Northstar Retail Support Dashboard</h2>
+            <p>Support Deflection Automated Assistant MVP</p>
+        </div>
+
+        <!-- Chat Output Pipeline Window View -->
+        <div class="chat-box" id="chatBox">
+            <!-- Automated Welcome Greeting Stack -->
+            <div class="message bot-message" id="welcomeMessage">
+                Hello! Welcome to the Northstar Retail self-service portal. To resolve your problem instantly without a human agent, please select an option below:
+                <div class="button-group">
+                    <button class="action-btn" onclick="handleQuickSelect('Order Status')">📦 Track Order Status</button>
+                    <button class="action-btn" onclick="handleQuickSelect('Returns')">🔄 Returns & Refunds</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Action Input Box Area -->
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Type your message or tracking number here..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- CENTRAL CONFLICT-FREE WORKFLOW ROUTER SCRIPT -->
+    <script>
+        function appendUserBubble(text) {
+            const chatBox = document.getElementById('chatBox');
+            const bubble = document.createElement('div');
+            bubble.className = 'message user-message';
+            bubble.textContent = text;
+            chatBox.appendChild(bubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Intercepts dashboard quick-action buttons click events
+        function handleQuickSelect(category) {
+            appendUserBubble(category);
+            
+            // Route seamlessly to independent backend files depending on user choice
+            if (category === 'Order Status' && typeof processOrderStatusIntent === 'function') {
+                processOrderStatusIntent();
+            } else if (category === 'Returns' && typeof processReturnPolicyIntent === 'function') {
+                processReturnPolicyIntent();
+            }
+        }
+
+        // Monitored text message submission processing trunk
+        function sendMessage() {
+            const inputField = document.getElementById('userInput');
+            const userText = inputField.value.trim();
+            if (userText === "") return;
+
+            appendUserBubble(userText);
+            inputField.value = ""; // Clear input field tray immediately
+
+            const chatBox = document.getElementById('chatBox');
+            
+            // Check state conditions matching Member 3's independent script flag
+            const isOrderSearchActive = chatBox.getAttribute('data-order-search-active');
+            // Check state conditions matching Member 4's independent script flag
+            const isRefundSearchActive = chatBox.getAttribute('data-refund-search-active');
+
+            if (isOrderSearchActive === 'true' && typeof executeOrderSearch === 'function') {
+                executeOrderSearch(userText);
+            } else if (isRefundSearchActive === 'true' && typeof executeRefundSearch === 'function') {
+                executeRefundSearch(userText);
+            } else {
+                // Natural keyword input parser loop fallback if user types instead of clicking buttons
+                const lowerText = userText.toLowerCase();
+                if ((lowerText.includes('track') || lowerText.includes('order') || lowerText.includes('where')) && typeof processOrderStatusIntent === 'function') {
+                    processOrderStatusIntent();
+                } else if ((lowerText.includes('return') || lowerText.includes('refund') || lowerText.includes('policy')) && typeof processReturnPolicyIntent === 'function') {
+                    processReturnPolicyIntent();
+                } else {
+                    // Standard fallback error text wrapper box
+                    const errorBubble = document.createElement('div');
+                    errorBubble.className = 'message bot-message';
+                    errorBubble.innerHTML = `I couldn't process that request. Please select one of our automated channels below or contact support:
+                        <div class="button-group">
+                            <button class="action-btn" onclick="handleQuickSelect('Order Status')">📦 Track Order Status</button>
+                            <button class="action-btn" onclick="handleQuickSelect('Returns')">🔄 Returns & Refunds</button>
+                        </div>`;
+                    chatBox.appendChild(errorBubble);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+            }
+        }
+    </script>
+
+    <!-- INJECTING EXTERNAL INDEPENDENT TEAM SCRIPTS IN HARMONY -->
+    <script src="order-status.js"></script>
+    <script src="refund-tracker.js"></script>
+</body>
+</html>
